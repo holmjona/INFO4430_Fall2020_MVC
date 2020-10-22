@@ -14,8 +14,9 @@
 <table>
 @foreach(User usr in Model){
     <tr>
-    <td>@usr.FirstName</td>
-        <td><a href="Details/@usr.ID">Details</a></td>
-        </tr>
+        <td>@usr.FirstName</td>
+        <td><a href="Details/@usr.ID">Details</a>
+        <a asp-action="Details" asp-route-id="@usr.ID">View</a></td>
+    </tr>
 }
 </table>

@@ -1,0 +1,13 @@
+﻿@model Boolean
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+    top or bottom?
+*@
+
+@{string postion = ""; }
+@if (Model) {
+    postion = "top";
+} else {
+    postion = "bottom";
+}
+<div class="bun @postion"></div>

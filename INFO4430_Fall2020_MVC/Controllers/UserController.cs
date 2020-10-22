@@ -16,9 +16,13 @@ namespace INFO4430_Fall2020_MVC.Controllers {
             return View(DAL.GetUsers());
         }
 
-        public IActionResult Details(int id) {
-            User myUser = DAL.GetUser(id);
-            return View("Details", myUser);
+        public IActionResult Details(int? id) {
+            if (id == null) {
+                return NotFound();
+            } else { // not null
+                User myUser = DAL.GetUser((int)id);
+                return View(myUser);
+            }
         }
     }
 }
