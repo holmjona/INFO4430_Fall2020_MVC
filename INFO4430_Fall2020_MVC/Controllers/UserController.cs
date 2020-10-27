@@ -24,5 +24,9 @@ namespace INFO4430_Fall2020_MVC.Controllers {
                 return View(myUser);
             }
         }
+
+        public IActionResult Create() {
+            return View();
+        }
     }
 }
