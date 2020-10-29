@@ -1,5 +1,4 @@
-﻿@using INFO4430_Fall2020_MVC.Models;
-@model List<User>
+﻿@model IEnumerable<INFO4430_Fall2020_MVC.Models.User>
 
 @{
     ViewData["Title"] = "List";
@@ -7,16 +6,57 @@
 
 <h1>List</h1>
 
-@*@Model.ToString()*@
-@*@for (int ndx=0; ndx < Model.Count; ndx++){
-    <p>@Model[ndx].FirstName</p>
-}*@
-<table>
-@foreach(User usr in Model){
-    <tr>
-        <td>@usr.FirstName</td>
-        <td><a href="Details/@usr.ID">Details</a>
-        <a asp-action="Details" asp-route-id="@usr.ID">View</a></td>
-    </tr>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAwesome)
+            </th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+                @*@Html.EditorFor(modelItem => item.FirstName)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+                Watch this. 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAwesome)
+                @Html.EditorFor(modelItem => item.IsAwesome)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
 }
+    </tbody>
 </table>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Westwind.AspNetCore.LiveReload;
 
 namespace INFO4430_Fall2020_MVC {
     public class Startup {
@@ -19,12 +20,16 @@ namespace INFO4430_Fall2020_MVC {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllersWithViews();
+            services.AddLiveReload();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddMvc().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
+                app.UseLiveReload();
             } else {
                 app.UseExceptionHandler("/Home/Error");
             }

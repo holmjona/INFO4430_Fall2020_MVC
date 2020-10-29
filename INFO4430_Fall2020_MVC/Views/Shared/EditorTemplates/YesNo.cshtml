@@ -1,0 +1,13 @@
+﻿@model Boolean
+@{ 
+    string chk = "";
+    if (Model) {
+        chk = "checked";
+    }
+}
+<input type="checkbox" @chk onclick="alert('I was clicked.');" /> 
+@if (Model) {
+    <label>Yes</label>
+} else {
+    <label>No</label>
+}

@@ -1,0 +1,22 @@
+﻿@using INFO4430_Fall2020_MVC.Models;
+@model List<User>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+
+@*@Model.ToString()*@
+@*@for (int ndx=0; ndx < Model.Count; ndx++){
+    <p>@Model[ndx].FirstName</p>
+}*@
+<table>
+@foreach(User usr in Model){
+    <tr>
+        <td>@usr.FirstName</td>
+        <td><a href="Details/@usr.ID">Details</a>
+        <a asp-action="Details" asp-route-id="@usr.ID">View</a></td>
+    </tr>
+}
+</table>
