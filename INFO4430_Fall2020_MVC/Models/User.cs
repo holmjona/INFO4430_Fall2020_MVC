@@ -12,8 +12,10 @@ namespace INFO4430_Fall2020_MVC.Models {
         private string _LastName;
         private string _Password;
         private bool _IsAwesome;
+        
 
 
+        [Range(10,100)]
         public int ID {
             get { return _ID; }
             set { _ID = value; }

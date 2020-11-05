@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Westwind.AspNetCore.LiveReload;
+using Microsoft.EntityFrameworkCore;
+using INFO4430_Fall2020_MVC.Data;
 
 namespace INFO4430_Fall2020_MVC {
     public class Startup {
@@ -23,6 +25,9 @@ namespace INFO4430_Fall2020_MVC {
             services.AddLiveReload();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddMvc().AddRazorRuntimeCompilation();
+
+    services.AddDbContext<DELETEME_Context>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DELETEME_Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -25,8 +25,34 @@ namespace INFO4430_Fall2020_MVC.Controllers {
             }
         }
 
+
         public IActionResult Create() {
             return View();
         }
+
+        [HttpPost]
+        //public ActionResult Create([Bind("FirstName", "LastName")] User usr) {
+        public ActionResult Create(User usr) {
+            if (ModelState.IsValid) {
+                // Good data
+                int a = 3;
+            } else {
+                // Bad data
+                int a = 5;
+            }
+            return View();
+        }
+        //[HttpPost]
+        //public ActionResult Create(int id, string firstName,string lastName) {
+        //    User usr = new User();
+        //    usr.ID = id;
+        //    usr.FirstName = firstName;
+        //    usr.LastName = Request.Form["LastName"];
+
+        //    return View();
+        //}
+
+
+
     }
 }
