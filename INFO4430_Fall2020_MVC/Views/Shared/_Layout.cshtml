@@ -22,6 +22,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                Items
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link text-dark" asp-controller="User" asp-action="Index">Users</a></li>
+                                <li><a class="nav-link text-dark" asp-controller="Course" asp-action="Index">Courses</a></li>
+                                <li><a class="nav-link text-dark" asp-controller="Instructor" asp-action="Index">Instructors</a></li>
+                                <li><a class="nav-link text-dark" asp-controller="Student" asp-action="Index">Students</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -30,9 +42,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Contact">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="User" asp-action="Index">Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Sandwich" asp-action="Index">Sandwiches</a>

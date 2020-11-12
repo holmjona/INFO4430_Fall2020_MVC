@@ -17,5 +17,7 @@ namespace INFO4430_Fall2020_MVC.Data
         public DbSet<INFO4430_Fall2020_MVC.Models.Course> Course { get; set; }
 
         public DbSet<INFO4430_Fall2020_MVC.Models.Instructor> Instructor { get; set; }
+
+        public DbSet<INFO4430_Fall2020_MVC.Models.Student> Student { get; set; }
     }
 }
