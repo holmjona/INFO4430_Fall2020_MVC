@@ -22,8 +22,22 @@ namespace INFO4430_Fall2020_MVC.Controllers
         // GET: Course
         public async Task<IActionResult> Index()
         {
+            //MD5
+            //SHA-1
+            //SHA-128
+            //SHA-256
+
+            //PBKDF2
+
+
+            //User curUser = new User();
+            ////if (!curUser.hasPermission) {
+            //    return RedirectToAction("Index", "Home");
+            ////}
+
             List<Course> lst = DAL.GetCourses();
             return View(lst);
+            
         }
 
         // GET: Course/Details/5
