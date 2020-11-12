@@ -175,11 +175,14 @@ namespace INFO4430_Fall2020_MVC.Models
                 {
                     retObj = new Instructor(dr);
                 }
-                comm.Connection.Close();
             }
             catch (Exception ex)
             {
-                comm.Connection.Close();
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            } finally {
+                if (comm.Connection != null) {
+                    comm.Connection.Close();
+                }
             }
             return retObj;
         }

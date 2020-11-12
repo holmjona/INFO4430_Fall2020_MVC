@@ -12,17 +12,17 @@ namespace INFO4430_Fall2020_MVC.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly DELETEME_Context _context;
 
-        public StudentController(DELETEME_Context context)
+        public StudentController()
         {
-            _context = context;
+        
         }
 
         // GET: Student
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Student.ToListAsync());
+            //return View(await _context.Student.ToListAsync());
+            return View(DAL.GetStudents());
         }
 
         // GET: Student/Details/5
@@ -33,8 +33,9 @@ namespace INFO4430_Fall2020_MVC.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student
-                .FirstOrDefaultAsync(m => m.ID == id);
+            //var student = await _context.Student
+            //    .FirstOrDefaultAsync(m => m.ID == id);
+            Student student = DAL.GetStudent((int)id);
             if (student == null)
             {
                 return NotFound();
@@ -58,8 +59,9 @@ namespace INFO4430_Fall2020_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(student);
-                await _context.SaveChangesAsync();
+                //_context.Add(student);
+                //await _context.SaveChangesAsync();
+                DAL.AddStudent(student);
                 return RedirectToAction(nameof(Index));
             }
             return View(student);
@@ -73,7 +75,9 @@ namespace INFO4430_Fall2020_MVC.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student.FindAsync(id);
+            //var student = await _context.Student.FindAsync(id);
+            Student student = DAL.GetStudent((int)id);
+
             if (student == null)
             {
                 return NotFound();
@@ -97,19 +101,20 @@ namespace INFO4430_Fall2020_MVC.Controllers
             {
                 try
                 {
-                    _context.Update(student);
-                    await _context.SaveChangesAsync();
+                    //_context.Update(student);
+                    //await _context.SaveChangesAsync();
+                    DAL.UpdateStudent(student);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //if (!StudentExists(student.ID))
+                    //{
+                    //    return NotFound();
+                    //}
+                    //else
+                    //{
+                    //    throw;
+                    //}
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -124,8 +129,10 @@ namespace INFO4430_Fall2020_MVC.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student
-                .FirstOrDefaultAsync(m => m.ID == id);
+            //var student = await _context.Student
+            //    .FirstOrDefaultAsync(m => m.ID == id);
+            Student student = DAL.GetStudent((int)id);
+
             if (student == null)
             {
                 return NotFound();
@@ -139,15 +146,14 @@ namespace INFO4430_Fall2020_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Student.FindAsync(id);
-            _context.Student.Remove(student);
-            await _context.SaveChangesAsync();
+            //var student = await _context.Student.FindAsync(id);
+            //_context.Student.Remove(student);
+            //await _context.SaveChangesAsync();
+            Student student = DAL.GetStudent((int)id);
+            DAL.RemoveStudent(student);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
-        {
-            return _context.Student.Any(e => e.ID == id);
-        }
+        
     }
 }

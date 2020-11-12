@@ -12,11 +12,10 @@ namespace INFO4430_Fall2020_MVC.Controllers
 {
     public class CourseController : Controller
     {
-        private readonly DELETEME_Context _context;
-
-        public CourseController(DELETEME_Context context)
+        
+        public CourseController()
         {
-            _context = context;
+            
         }
 
         // GET: Course
@@ -68,12 +67,13 @@ namespace INFO4430_Fall2020_MVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,CourseID,Name,IndexNumber,InstructorID")] Course course)
+        public async Task<IActionResult> Create([Bind("ID,Name,IndexNumber,InstructorID")] Course course)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
-                await _context.SaveChangesAsync();
+                //_context.Add(course);
+                //await _context.SaveChangesAsync();
+                DAL.AddCourse(course);
                 return RedirectToAction(nameof(Index));
             }
             return View(course);
@@ -86,8 +86,8 @@ namespace INFO4430_Fall2020_MVC.Controllers
             {
                 return NotFound();
             }
-
-            var course = await _context.Course.FindAsync(id);
+            Course course = DAL.GetCourse((int)id);
+            //var course = await _context.Course.FindAsync(id);
             if (course == null)
             {
                 return NotFound();
@@ -100,7 +100,7 @@ namespace INFO4430_Fall2020_MVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,CourseID,Name,IndexNumber,InstructorID")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,IndexNumber,InstructorID")] Course course)
         {
             if (id != course.ID)
             {
@@ -111,19 +111,22 @@ namespace INFO4430_Fall2020_MVC.Controllers
             {
                 try
                 {
-                    _context.Update(course);
-                    await _context.SaveChangesAsync();
+                    //validate here first
+                    //Course oriCourse = DAL.GetCourse(id);
+                    //_context.Update(course);
+                    //await _context.SaveChangesAsync();
+                    DAL.UpdateCourse(course);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseExists(course.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //if (!CourseExists(course.ID))
+                    //{
+                    //    return NotFound();
+                    //}
+                    //else
+                    //{
+                    //    throw;
+                    //}
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -138,8 +141,9 @@ namespace INFO4430_Fall2020_MVC.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Course
-                .FirstOrDefaultAsync(m => m.ID == id);
+            //var course = await _context.Course
+            //    .FirstOrDefaultAsync(m => m.ID == id);
+            Course course = DAL.GetCourse((int)id);
             if (course == null)
             {
                 return NotFound();
@@ -153,15 +157,17 @@ namespace INFO4430_Fall2020_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Course.FindAsync(id);
-            _context.Course.Remove(course);
-            await _context.SaveChangesAsync();
+            //var course = await _context.Course.FindAsync(id);
+            Course course = DAL.GetCourse((int)id);
+            //_context.Course.Remove(course);
+            DAL.RemoveCourse(course);
+            //await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourseExists(int id)
-        {
-            return _context.Course.Any(e => e.ID == id);
-        }
+        //private bool CourseExists(int id)
+        //{
+        //    return _context.Course.Any(e => e.ID == id);
+        //}
     }
 }
