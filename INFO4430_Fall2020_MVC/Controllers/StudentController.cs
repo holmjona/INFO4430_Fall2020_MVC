@@ -19,10 +19,18 @@ namespace INFO4430_Fall2020_MVC.Controllers
         }
 
         // GET: Student
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page, int size = 3)
         {
             //return View(await _context.Student.ToListAsync());
-            return View(DAL.GetStudents());
+            List<Student> studs = DAL.GetStudents();
+            if (size == 0) size = 3; //studs.Count;
+            int numberOfPages = studs.Count / size;
+            if (studs.Count % size > 0) numberOfPages += 1;
+            ViewBag.NumberOfPages = numberOfPages;
+            ViewBag.PageSize = size;
+            int start = (page-1) * size;
+            IEnumerable<Student> studToShow = studs.Skip(start).Take(size);
+            return View(studToShow);
         }
 
         // GET: Student/Details/5
@@ -153,6 +161,18 @@ namespace INFO4430_Fall2020_MVC.Controllers
             DAL.RemoveStudent(student);
             return RedirectToAction(nameof(Index));
         }
+
+
+        public ActionResult AsJson() {
+            List<Student> studs = DAL.GetStudents();
+            List<object> retObjs = new List<object>();
+            foreach (Student stu in studs) {
+                retObjs.Add(new { name = stu.FirstName, id = stu.ID });
+            }
+
+            return Json(retObjs);
+        }
+
 
         
     }

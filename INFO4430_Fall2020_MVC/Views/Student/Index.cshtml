@@ -9,6 +9,11 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<ol>
+@for (int pageNum = 1; pageNum <= ViewBag.NumberOfPages; pageNum++) {
+    <li><a href="?page=@pageNum&size=@ViewBag.PageSize">@pageNum</a></li>
+}
+    </ol>
 <table class="table">
     <thead>
         <tr>
