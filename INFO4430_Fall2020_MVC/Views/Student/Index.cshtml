@@ -18,6 +18,9 @@
     <thead>
         <tr>
             <th>
+                Card
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
@@ -38,6 +41,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                <partial name="Parts/_Card" model="@item" />
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>

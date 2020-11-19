@@ -1,0 +1,14 @@
+﻿@model Student
+
+<div>
+    <h1>@Model.FirstName @Model.LastName</h1>
+    <div>
+        @Model.NickName
+    </div>
+    <ul class="actions">
+        <li><a asp-controller="Student" asp-action="Edit"
+               asp-route-id="@Model.ID" >Edit</a></li>
+        <li><a asp-controller="Student" asp-action="View"
+               asp-route-id="@Model.ID" >View</a></li>
+    </ul>
+</div>

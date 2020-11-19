@@ -169,5 +169,20 @@ namespace INFO4430_Fall2020_MVC.Controllers
         //{
         //    return _context.Course.Any(e => e.ID == id);
         //}
+
+        [HttpPost]
+        public ActionResult Search(string searchText) {
+            List<Course> crses = DAL.GetCourses();
+            searchText = searchText.ToLower();
+            List<object> retObjs = new List<object>();
+            foreach (Course crs in crses) {
+                if (crs.Name.ToLower().Contains(searchText)) {
+                    retObjs.Add(new { name = crs.Name, id = crs.ID });
+                }
+            }
+
+            return Json(retObjs);
+        }
+
     }
 }

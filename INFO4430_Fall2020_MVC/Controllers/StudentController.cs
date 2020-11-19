@@ -173,7 +173,29 @@ namespace INFO4430_Fall2020_MVC.Controllers
             return Json(retObjs);
         }
 
+        [HttpPost]
+        public ActionResult Search(string searchText) { 
+            List<Student> studs = DAL.GetStudents();
+            searchText = searchText.ToLower();
+            List<object> retObjs = new List<object>();
+            foreach (Student stu in studs) {
+                if (stu.FirstName.ToLower().Contains(searchText) ||
+                    stu.LastName.ToLower().Contains(searchText)) {
+                    retObjs.Add(new { name = stu.FirstName, id = stu.ID });
+                }
+            }
 
-        
+            return Json(retObjs);
+        }
+
+
+        [HttpPost]
+        public ActionResult Card(int id) {
+            Student studFound = DAL.GetStudent(id);
+            return PartialView("Parts/_Card", studFound);
+        }
+
+
+
     }
 }
